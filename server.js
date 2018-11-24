@@ -23,10 +23,16 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 
 // DB connect ("Mongoose")
-new Mongoose().connect().then(() => {
-  nodesActions.updateRegistered();
-});
-
+new Mongoose()
+  .connect()
+  .then(() => {
+    nodesActions.updateRegistered();
+  })
+  .catch(err => {
+    // we will not be here...
+    console.error("App starting error:", err.stack);
+    process.exit(1);
+  });
 //use routes
 server.use("/api/nodes", nodes);
 server.use("/api/users", users);
@@ -34,6 +40,7 @@ server.use("/api/telemetry", telemetry);
 
 // enable "client" access to it's local depedncies (bootstrap, fonts, etc)
 server.use(express.static(__dirname + "/client"));
+server.use(express.static(__dirname + "/client/public"));
 
 // "mosca" mqtt
 var settings = {
