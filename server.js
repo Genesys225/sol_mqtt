@@ -3,6 +3,7 @@ const express = require("express");
 const Mongoose = require("./db/Mongoose");
 const bodyParser = require("body-parser");
 const mosca = require("mosca");
+var path = require("path");
 const nodesActions = require("./sensor_nodes/nodesActions");
 const telemetryActions = require("./sensor_nodes/telemetryActions");
 const passport = require("passport");
