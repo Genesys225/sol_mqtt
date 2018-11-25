@@ -45,7 +45,7 @@ server.use(express.static(__dirname + "/client"));
 server.use(express.static(__dirname + "/client/public"));
 
 // Handles any requests that don't match the ones above
-app.get("*", (req, res) => {
+server.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
