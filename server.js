@@ -39,8 +39,14 @@ server.use("/api/users", users);
 server.use("/api/telemetry", telemetry);
 
 // enable "client" access to it's local depedncies (bootstrap, fonts, etc)
+server.use(express.static(path.join(__dirname, "client/build")));
 server.use(express.static(__dirname + "/client"));
 server.use(express.static(__dirname + "/client/public"));
+
+// Handles any requests that don't match the ones above
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 // "mosca" mqtt
 var settings = {
