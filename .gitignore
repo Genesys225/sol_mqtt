@@ -1,2 +1,5 @@
 /node_modules
 /client/node_modules
+!/client/node_modules/bootstrap/dist
+!/client/node_modules/@fortawesome/fontawesome-free/js/all.js
+!/client/jquery/dist
