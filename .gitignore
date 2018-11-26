@@ -16,7 +16,7 @@ client/node_modules/@fortawesome/*
 !client/node_modules/@fortawesome/fontawesome-free/
 
 client/node_modules/@fortawesome/fontawesome-free/*
-!client/node_modules/@fortawesome/fontawesome-free/js/*
+!client/node_modules/@fortawesome/fontawesome-free/js/
 
 !client/node_modules/jquery/
 client/node_modules/jquery/*
