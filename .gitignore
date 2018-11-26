@@ -2,5 +2,5 @@ node_modules
 client/*
 !client/node_modules/bootstrap/dist/
 !client/node_modules/@fortawesome/fontawesome-free/js/
-!/client/jquery/dist/
+!/client/node_modules/jquery/dist/
 !/client/build/
