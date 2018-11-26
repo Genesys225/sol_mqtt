@@ -10,6 +10,17 @@ client/node_modules/*
 client/node_modules/bootstrap/*
 !client/node_modules/bootstrap/dist/
 
+client/node_modules/bootstrap/dist/*
+!client/node_modules/bootstrap/dist/css/
+
+!client/node_modules/bootstrap/dist/js/
+
+client/node_modules/bootstrap/dist/css/*
+!client/node_modules/bootstrap/dist/css/bootstrap.min.css
+
+client/node_modules/bootstrap/dist/js/*
+!client/node_modules/bootstrap/dist/js/bootstrap.min.js
+
 !client/node_modules/@fortawesome/
 
 client/node_modules/@fortawesome/*
@@ -18,6 +29,14 @@ client/node_modules/@fortawesome/*
 client/node_modules/@fortawesome/fontawesome-free/*
 !client/node_modules/@fortawesome/fontawesome-free/js/
 
+client/node_modules/@fortawesome/fontawesome-free/js/*
+!client/node_modules/@fortawesome/fontawesome-free/js/all.js
+
+
 !client/node_modules/jquery/
+
 client/node_modules/jquery/*
 !client/node_modules/jquery/dist/
+
+client/node_modules/jquery/dist/*
+!client/node_modules/jquery/dist/jquery.slim.min.js
