@@ -2,6 +2,9 @@ node_modules
 client/*
 !/client/build/
 client/node_modules/*
+client/node_modules/bootstrap/*
 !client/node_modules/bootstrap/dist/
+client/node_modules/@fortawesome/*
 !client/node_modules/@fortawesome/fontawesome-free/js/
+client/node_modules/jquery/*
 !/client/node_modules/jquery/dist/
