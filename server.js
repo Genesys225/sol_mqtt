@@ -43,13 +43,11 @@ server.use("/api/telemetry", telemetry);
 if (process.env.NODE_ENV === "production") {
   server.use(express.static(path.join(__dirname, "client/build")));
   server.use(
-    express.static(
-      __dirname + "/client/node_modules/jquery/dist/jquery.slim.min.js"
-    )
+    express.static(__dirname + "/node_modules/jquery/dist/jquery.slim.min.js")
   );
   server.use(
     express.static(
-      __dirname + "/client/node_modules/bootstrap/dist/js/bootstrap.min.js"
+      __dirname + "/node_modules/bootstrap/dist/js/bootstrap.min.js"
     )
   );
   server.use(
