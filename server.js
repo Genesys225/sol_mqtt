@@ -42,10 +42,18 @@ server.use("/api/telemetry", telemetry);
 // enable "client" access to it's local depedncies (bootstrap, fonts, etc)
 if (process.env.NODE_ENV === "production") {
   server.use(express.static(path.join(__dirname, "client/build")));
-  server.use(express.static(__dirname + "/node_modules/jquery/dist/"));
-  server.use(express.static(__dirname + "/node_modules/bootstrap/dist/js/"));
   server.use(
-    express.static(__dirname + "node_modules/@fortawesome/fontawesome-free/js/")
+    express.static(__dirname + "/node_modules/jquery/dist/jquery.slim.min.js")
+  );
+  server.use(
+    express.static(
+      __dirname + "/node_modules/bootstrap/dist/js/bootstrap.min.js"
+    )
+  );
+  server.use(
+    express.static(
+      __dirname + "node_modules/@fortawesome/fontawesome-free/js/all.js"
+    )
   );
 } else {
   server.use(express.static(path.join(__dirname, "client/build")));
