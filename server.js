@@ -40,9 +40,12 @@ server.use("/api/users", users);
 server.use("/api/telemetry", telemetry);
 
 // enable "client" access to it's local depedncies (bootstrap, fonts, etc)
-server.use(express.static(path.join(__dirname, "client/build")));
-server.use(express.static(__dirname + "/client"));
-server.use(express.static(__dirname + "/client/public"));
+if (process.env.NODE_ENV === "production") {
+  server.use(express.static(path.join(__dirname, "client/build")));
+} else {
+  server.use(express.static(__dirname + "/client"));
+  server.use(express.static(__dirname + "/client/public"));
+}
 
 // Handles any requests that don't match the ones above
 server.get("*", (req, res) => {
