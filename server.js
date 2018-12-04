@@ -42,15 +42,14 @@ server.use("/api/telemetry", telemetry);
 // enable "client" access to it's local depedncies (bootstrap, fonts, etc)
 if (process.env.NODE_ENV === "production") {
   server.use(express.static(path.join(__dirname + "/client/build")));
-  //server.use(express.static(__dirname + "/js/jquery.slim.min.js"));
-  //server.use(express.static(__dirname + "/js/bootstrap.min.js"));
-  //server.use(express.static(__dirname + "/js/all.js"));
   server.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname + "/client/build/index.html"));
   });
 } else {
-  server.use(express.static(__dirname + "/client"));
-  server.use(express.static(__dirname + "/client/public"));
+  server.use(express.static(path.join(__dirname + "/client/public")));
+  server.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname + "/client/public/index.html"));
+  });
 }
 
 // "mosca" mqtt
