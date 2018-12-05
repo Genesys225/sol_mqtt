@@ -17,6 +17,7 @@
     "body-parser": "^1.18.3",
     "bonjour": "^3.5.0",
     "concurrently": "^4.0.1",
+    "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "express-router": "0.0.1",
     "jsonwebtoken": "^8.3.0",
