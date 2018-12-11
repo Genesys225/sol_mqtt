@@ -2,10 +2,9 @@ const bonjour = require("bonjour")();
 const express = require("express");
 const Mongoose = require("./db/Mongoose");
 const bodyParser = require("body-parser");
-const mosca = require("mosca");
+const mqtt = require("./mqtt/mqtt");
 var path = require("path");
 const nodesActions = require("./sensor_nodes/nodesActions");
-const telemetryActions = require("./sensor_nodes/telemetryActions");
 const passport = require("passport");
 
 const nodes = require("./routes/api/nodes");
@@ -52,15 +51,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// "mosca" mqtt
-var settings = {
-  port: 1883
-};
-var broker = new mosca.Server(settings);
-
 const port = process.env.PORT || 5000;
 
 const io = new SocketIO(port + 1);
+const mqttBroker = new mqtt();
 
 // "Express" server establish
 server.listen(port, () => console.log(`Server running on port ${port}`));
@@ -71,15 +65,3 @@ bonjour.publish({
   type: "http",
   port: port
 });
-
-// "mosca" mqtt
-broker.on("clientConnected", client => {
-  console.log("client connected", client.id);
-});
-
-// fired when a message is received
-broker.on("published", function(packet, client) {
-  telemetryActions.logTelemetry(packet);
-});
-
-broker.on("ready", () => console.log("Mosca server is up and running"));

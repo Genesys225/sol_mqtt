@@ -1,5 +1,6 @@
 const UserDb = require("../db/UserDb");
 const NodesDb = require("../db/NodesDb");
+const Mqtt = require("../mqtt/mqtt");
 
 const nodesDb = new NodesDb();
 
@@ -10,6 +11,14 @@ module.exports = userActions = {
 
         .then(user => resolve(user.preferences))
         .catch(err => reject(err));
+    });
+  },
+
+  establishMqttRelay(cloudHost, cloudPort) {
+    return new Promise((resolve, reject) => {
+      Mqtt.establishMessageRelay(cloudHost, cloudPort).then(res =>
+        resolve(res)
+      );
     });
   },
 

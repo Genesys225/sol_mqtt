@@ -41,8 +41,8 @@ router.get(
 );
 
 /*
- * @route   GET api/user/get-preferences/:userid
- * @desc    Add comment to post
+ * @route   GET api/users/get-preferences/:userid
+ * @desc    get user preferences
  * @access  Private
  */
 router.get(
@@ -57,8 +57,8 @@ router.get(
 );
 
 /*
- * @route   POST api/nodes/assign-handle/:id
- * @desc    Add comment to post
+ * @route   POST api/users/assign-handle/:id
+ * @desc    assign handsle to node
  * @access  Private
  */
 router.post(
@@ -68,6 +68,23 @@ router.post(
     userActions
       .addOrUpdateHandle(req.body.user_id, req.params.name, req.body.handle)
       .then(user => res.json(user))
+      .catch(err => res.status(404).json(err));
+  }
+);
+
+/*
+ * @route   POST api/users/establish-mqtt-relay
+ * @desc    Add comment to post
+ * @access  Private
+ */
+router.post(
+  "/establish-mqtt-relay",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { cloudHost, cloudPort } = req.body;
+    userActions
+      .establishMqttRelay(cloudHost, cloudPort)
+      .then(confirmation => res.json(confirmation))
       .catch(err => res.status(404).json(err));
   }
 );
