@@ -4,17 +4,23 @@ const mqttClient = require("mqtt");
 
 const telemetryActions = require("../sensor_nodes/telemetryActions");
 
-module.exports = class Mqtt {
-  constructor(port = 1883) {
+class Mqtt {
+  constructor() {
     let settings = {
-      port
+      port: 1883
     };
     this.relayAnabled = false;
     this.broker = new mosca.Server(settings);
-    this.initializeBroker(this.broker);
   }
 
-  initializeBroker(broker) {
+  initializeBroker(port = false) {
+    let { broker } = this;
+    if (port) {
+      let settings = {
+        port
+      };
+      broker = new mosca.Server(settings);
+    }
     this.brokerEstablishedCallBack(broker);
     this.listenOnClientConnected(broker);
     this.listenOnMessageRecieved(broker);
@@ -38,11 +44,9 @@ module.exports = class Mqtt {
     });
   }
 
-  static establishMessageRelay(cloudHost, cloudPort) {
+  establishMessageRelay(cloudHost, cloudPort) {
     return new Promise((resolve, reject) => {
-      this.relayClient = mqttClient.connect([
-        { host: cloudHost, port: cloudPort }
-      ]);
+      this.relayClient = mqttClient.connect("mqtt://" + cloudHost);
       this.relayClient.on("connect", () => {
         this.relayAnabled = true;
         resolve({
@@ -53,4 +57,6 @@ module.exports = class Mqtt {
       });
     });
   }
-};
+}
+
+module.exports = mqttBroker = new Mqtt();

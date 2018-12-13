@@ -2,7 +2,7 @@ const bonjour = require("bonjour")();
 const express = require("express");
 const Mongoose = require("./db/Mongoose");
 const bodyParser = require("body-parser");
-const mqtt = require("./mqtt/mqtt");
+const mqttBroker = require("./mqtt/mqtt");
 var path = require("path");
 const nodesActions = require("./sensor_nodes/nodesActions");
 const passport = require("passport");
@@ -54,8 +54,7 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 5000;
 
 const io = new SocketIO(port + 1);
-const mqttBroker = new mqtt();
-
+mqttBroker.initializeBroker();
 // "Express" server establish
 server.listen(port, () => console.log(`Server running on port ${port}`));
 
