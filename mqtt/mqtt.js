@@ -1,6 +1,8 @@
 // "mosca" mqtt
 const mosca = require("mosca");
 const mqttClient = require("mqtt");
+const messageEmitter = require("../sensor_nodes/messageEmitter");
+var ip = require("ip");
 
 const telemetryActions = require("../sensor_nodes/telemetryActions");
 
@@ -40,13 +42,25 @@ class Mqtt {
     broker.on("published", (packet, client) => {
       telemetryActions.logTelemetry(packet);
       this.relayAnabled &&
-        this.relayClient.publish(packet.topic, packet.payload);
+        this.relayClient.publish("relayClient/" + packet.topic, packet.payload);
     });
   }
 
   establishMessageRelay(cloudHost, cloudPort) {
     return new Promise((resolve, reject) => {
-      this.relayClient = mqttClient.connect("mqtt://" + cloudHost);
+      // this.relayClient = mqttClient.createConnection(
+      //   cloudPort,
+      //   cloudHost,
+      //   (err) =>
+      //     {if (err) throw err})
+
+      // relayClient.connect({
+      //       clientId: 'relayClient'
+      //     });
+      this.relayClient = mqttClient.connect(
+        "mqtt://" + cloudHost + ":" + cloudPort,
+        { clientId: "relayClient" + ip.address() }
+      );
       this.relayClient.on("connect", () => {
         this.relayAnabled = true;
         resolve({
