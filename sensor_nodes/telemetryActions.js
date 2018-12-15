@@ -19,7 +19,9 @@ module.exports = telemetryActions = {
           // emit to socket
           .then(storedTelem => messageEmitter.registeredMessage(storedTelem))
       : // emit to deferent socket if not registered
-        messageEmitter.unRegisteredMessage(topic, payload);
+      topic.substr(0, 11) === "relayClient"
+      ? messageEmitter.relayClientMessage(topic, payload)
+      : messageEmitter.unRegisteredMessage(topic, payload);
   },
 
   getTelemetryBetweenDates(nodeName, sonsorType, from, to) {

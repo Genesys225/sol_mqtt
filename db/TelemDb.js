@@ -5,20 +5,16 @@ class TelemDb {
 
   createTelemDoc(topic, payload) {
     return new Promise((resolve, reject) => {
-      let nameTypeIndex = 0;
-      topic.substr(0, 11) === "relayClient" && (nameTypeIndex = 1);
       const newTelemetry = new Telemetry({
         value: payload.toString("utf8").split(" ")[0],
         units: payload.toString("utf8").split(" ")[1],
-        name: topic.split("/")[nameTypeIndex],
-        type: topic.split("/")[nameTypeIndex + 1]
+        name: topic.split("/")[0],
+        type: topic.split("/")[1]
       });
-      if (nameTypeIndex === 0)
-        newTelemetry
-          .save()
-          .then(tel => resolve(tel))
-          .catch(err => reject(err));
-      else resolve(newTelemetry);
+      newTelemetry
+        .save()
+        .then(tel => resolve(tel))
+        .catch(err => reject(err));
     });
   }
   getBetweenDates(nodeName, sonsorType, from, to) {
