@@ -1,4 +1,5 @@
 const bonjour = require("bonjour")();
+var ip = require("ip");
 const express = require("express");
 const Mongoose = require("./db/Mongoose");
 const bodyParser = require("body-parser");
@@ -52,6 +53,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 5000;
+process.env.PORT = port;
+process.env.IP = ip.address();
 
 const io = new SocketIO(port + 1);
 mqttBroker.initializeBroker();

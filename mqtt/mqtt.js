@@ -1,7 +1,6 @@
 // "mosca" mqtt
 const mosca = require("mosca");
 const mqttClient = require("mqtt");
-const messageEmitter = require("../sensor_nodes/messageEmitter");
 var ip = require("ip");
 
 const telemetryActions = require("../sensor_nodes/telemetryActions");
