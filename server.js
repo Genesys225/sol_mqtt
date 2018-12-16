@@ -55,7 +55,7 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 5000;
 process.env.PORT = port;
 const serverIp = ip.address();
-process.env.IP = serverIp;
+process.env.SERVER_IP = serverIp;
 
 const io = new SocketIO(port + 1);
 mqttBroker.initializeBroker();
