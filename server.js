@@ -56,7 +56,7 @@ const port = process.env.PORT || 5000;
 const serverIp = ip.address();
 process.env.SERVER_IP = serverIp;
 
-const io = new SocketIO(port + 1);
+const io = new SocketIO(parseInt(port) + 1);
 mqttBroker.initializeBroker();
 // "Express" server establish
 server.listen(port, () => console.log(`Server running on port ${port}`));
