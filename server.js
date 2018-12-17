@@ -53,7 +53,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 5000;
-process.env.PORT = port;
 const serverIp = ip.address();
 process.env.SERVER_IP = serverIp;
 
