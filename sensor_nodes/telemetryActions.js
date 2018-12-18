@@ -19,7 +19,10 @@ module.exports = telemetryActions = {
           // emit to socket
           .then(storedTelem => messageEmitter.registeredMessage(storedTelem))
       : // emit to deferent socket if not registered
-      topic.substr(0, 11) === "relayClient"
+      topic.substr(0, 11) === "relayClient" &&
+        Object.keys(this.registeredList).filter(
+          service => service === topic.split("/")[0]
+        ).length > 0
       ? messageEmitter.relayClientMessage(topic, payload)
       : messageEmitter.unRegisteredMessage(topic, payload);
   },
