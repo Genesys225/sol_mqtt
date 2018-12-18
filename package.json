@@ -16,11 +16,9 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bonjour": "^3.5.0",
-    "concurrently": "^4.0.1",
     "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "express-router": "0.0.1",
-    "http": "0.0.0",
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.8",
@@ -29,10 +27,10 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "socket.io": "^2.1.1",
-    "socket.io-client": "^2.2.0",
     "validator": "^10.8.0"
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "nodemon": "^1.18.5"
   }
 }
